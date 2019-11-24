@@ -18,13 +18,15 @@ function createCards() {
 // reusable func to create arranged and shuffled decks
 function createDecks(deck) {
   deck.forEach((card, i) => {
-    const positionFromLeft = i * 25;
-    const cardElement = document.createElement('div');
-    cardElement.setAttribute('data-value', card.value);
-    cardElement.setAttribute('id', 'cards');
-    cardElement.classList.add('card', `${card.suit}-${card.value}`);
-    cardElement.style.left = `${positionFromLeft}px`;
-    cardsWrapper.append(cardElement);
+    const interval = 50;
+    setTimeout(() => {
+      const positionFromLeft = i * 25;
+      const cardElement = document.createElement('div');
+      cardElement.setAttribute('data-value', card.value);
+      cardElement.classList.add('card', `${card.suit}-${card.value}`);
+      cardElement.style.left = `${positionFromLeft}px`;
+      cardsWrapper.append(cardElement);
+    }, interval*i);
   });
 }
 // adds hidden css class to div
