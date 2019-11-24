@@ -4600,6 +4600,7 @@ fieldset:disabled a.btn {
 
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
+  margin: 5px;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
