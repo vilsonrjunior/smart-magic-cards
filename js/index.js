@@ -26,7 +26,7 @@ function createDecks(deck) {
       cardElement.classList.add('card', `${card.suit}-${card.value}`);
       cardElement.style.left = `${positionFromLeft}px`;
       cardsWrapper.append(cardElement);
-    }, interval*i);
+    }, interval * i);
   });
 }
 // adds hidden css class to div
@@ -34,11 +34,15 @@ function hideShow() {
   cardsWrapper.classList.toggle('hidden');
 }
 
+document.getElementById('show-hide').addEventListener('click', hideShow);
+
+// remove previous cards from dom
 function removeDeck() {
   while (cardsWrapper.firstChild) {
     cardsWrapper.removeChild(cardsWrapper.firstChild);
   }
 }
+
 // alg to shuffle array
 function arrShuffle(array) {
   let place,
@@ -51,6 +55,7 @@ function arrShuffle(array) {
   }
   return array;
 };
+
 // func to pass cards through arrShuffle and create shuffled deck
 function shuffledCards() {
   removeDeck();
@@ -58,33 +63,28 @@ function shuffledCards() {
   const shuffled = arrShuffle(newCards);
   createDecks(shuffled);
 }
+
+document.getElementById('shuffle').addEventListener('click', shuffledCards);
+
 // func to remove shuffled deck and create a new arranged one
 function magic() {
   removeDeck();
   const deck = createCards();
   createDecks(deck);
 }
+
+document.getElementById('magic').addEventListener('click', magic);
 // removes start game btn and unhiddes btns
 function createButtons() {
   const startGameBtn = document.getElementById('start-game');
   startGameBtn.parentNode.removeChild(startGameBtn);
   document.getElementById('btns').style.visibility = 'visible';
 }
-
-function events() {
-  document.getElementById('shuffle').addEventListener('click', shuffledCards);
-  document.getElementById('show-hide').addEventListener('click', hideShow);
-  document.getElementById('magic').addEventListener('click', magic);
-}
-
 // also creates 1st deck displaying cards in cards
 function startGame() {
   createButtons();
-  createCards();
   const firstDeck = createCards();
   createDecks(firstDeck);
-  events();
 }
 
 document.getElementById('start-game').addEventListener('click', startGame);
-
