@@ -18,7 +18,7 @@ function createCards() {
 // reusable func to create arranged and shuffled decks
 function createDecks(deck) {
   deck.forEach((card, i) => {
-    const interval = 40;
+    const interval = 70;
     setTimeout(() => {
       const positionFromLeft = i * 25;
       const cardElement = document.createElement('div');
@@ -40,7 +40,7 @@ function pileCards(){
   const pile = cardsWrapper.children
   const arr = Array.from(pile)
   const rev = arr.reverse();
-  const interval = 40;
+  const interval = 70;
   for(let i = 0; i < rev.length; i++){
       setTimeout(() =>{
         rev[i].style.left = `${-i}px`;
@@ -76,7 +76,7 @@ function shuffledCards() {
     const newCards = createCards();
     const shuffled = arrShuffle(newCards);
     createDecks(shuffled);
-  }, 2500)
+  }, 4000)
 }
 
 document.getElementById('shuffle').addEventListener('click', shuffledCards);
@@ -88,7 +88,7 @@ pileCards();
   removeDeck();
   const deck = createCards();
   createDecks(deck);
-  }, 2500)
+  }, 4000)
 }
 
 document.getElementById('magic').addEventListener('click', magic);
