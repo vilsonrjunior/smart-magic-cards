@@ -18,7 +18,7 @@ function createCards() {
 // reusable func to create arranged and shuffled decks
 function createDecks(deck) {
   deck.forEach((card, i) => {
-    const interval = 50;
+    const interval = 40;
     setTimeout(() => {
       const positionFromLeft = i * 25;
       const cardElement = document.createElement('div');
@@ -35,6 +35,18 @@ function hideShow() {
 }
 
 document.getElementById('show-hide').addEventListener('click', hideShow);
+
+function pileCards(){
+  const pile = cardsWrapper.children
+  const arr = Array.from(pile)
+  const rev = arr.reverse();
+  const interval = 40;
+  for(let i = 0; i < rev.length; i++){
+      setTimeout(() =>{
+        rev[i].style.left = `${-i}px`;
+      }, interval * i)
+  }
+}
 
 // remove previous cards from dom
 function removeDeck() {
@@ -58,19 +70,25 @@ function arrShuffle(array) {
 
 // func to pass cards through arrShuffle and create shuffled deck
 function shuffledCards() {
-  removeDeck();
-  const newCards = createCards();
-  const shuffled = arrShuffle(newCards);
-  createDecks(shuffled);
+  pileCards();
+  setTimeout(() => {
+    removeDeck();
+    const newCards = createCards();
+    const shuffled = arrShuffle(newCards);
+    createDecks(shuffled);
+  }, 2500)
 }
 
 document.getElementById('shuffle').addEventListener('click', shuffledCards);
 
 // func to remove shuffled deck and create a new arranged one
 function magic() {
+pileCards();
+  setTimeout(() => {
   removeDeck();
   const deck = createCards();
   createDecks(deck);
+  }, 2500)
 }
 
 document.getElementById('magic').addEventListener('click', magic);
