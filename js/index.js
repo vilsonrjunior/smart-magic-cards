@@ -29,6 +29,7 @@ function createDecks(deck) {
     }, interval * i);
   });
 }
+
 // adds hidden css class to div
 function hideShow() {
   cardsWrapper.classList.toggle('hidden');
@@ -36,15 +37,15 @@ function hideShow() {
 
 document.getElementById('show-hide').addEventListener('click', hideShow);
 
-function pileCards(){
-  const pile = cardsWrapper.children
-  const arr = Array.from(pile)
-  const rev = arr.reverse();
+// changes style left in order to give the returning to deck effect
+function pileCards() {
+  const pile = cardsWrapper.children;
+  const arr = Array.from(pile).reverse();
   const interval = 70;
-  for(let i = 0; i < rev.length; i++){
-      setTimeout(() =>{
-        rev[i].style.left = `${-i}px`;
-      }, interval * i)
+  for (let i = 0; i < arr.length; i++) {
+    setTimeout(() => {
+      arr[i].style.left = `${-i}px`;
+    }, interval * i);
   }
 }
 
@@ -66,7 +67,7 @@ function arrShuffle(array) {
     array[place] = temp;
   }
   return array;
-};
+}
 
 // func to pass cards through arrShuffle and create shuffled deck
 function shuffledCards() {
@@ -76,28 +77,30 @@ function shuffledCards() {
     const newCards = createCards();
     const shuffled = arrShuffle(newCards);
     createDecks(shuffled);
-  }, 4000)
+  }, 4000);
 }
 
 document.getElementById('shuffle').addEventListener('click', shuffledCards);
 
 // func to remove shuffled deck and create a new arranged one
 function magic() {
-pileCards();
+  pileCards();
   setTimeout(() => {
-  removeDeck();
-  const deck = createCards();
-  createDecks(deck);
-  }, 4000)
+    removeDeck();
+    const deck = createCards();
+    createDecks(deck);
+  }, 4000);
 }
 
 document.getElementById('magic').addEventListener('click', magic);
+
 // removes start game btn and unhiddes btns
 function createButtons() {
   const startGameBtn = document.getElementById('start-game');
   startGameBtn.parentNode.removeChild(startGameBtn);
   document.getElementById('btns').style.visibility = 'visible';
 }
+
 // also creates 1st deck displaying cards in cards
 function startGame() {
   createButtons();
